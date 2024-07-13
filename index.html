@@ -10,8 +10,13 @@
   <body>
     <div class="container flex bg-black">
       <div class="left">
+        <div class="close">
+          <img width="30" class="invert" src="close.svg" alt="" />
+        </div>
         <div class="home bg-gray rounded m-1 p-1">
-          <div class="logo"><img width="120" class="invert" src="logo.svg" alt="" /></div>
+          <div class="logo">
+            <img width="120" class="invert" src="logo.svg" alt="" />
+          </div>
           <ul>
             <li><img class="invert" src="home.svg" alt="home" />Home</li>
             <li><img class="invert" src="search.svg" alt="search" />Search</li>
@@ -66,39 +71,48 @@
       <div class="right bg-gray rounded">
         <div class="header">
           <div class="nav">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              color="#000000"
-              fill="none"
-            >
-              <path
-                d="M17 4L8.66943 10.0405C6.44352 11.6545 6.44353 12.3455 8.66943 13.9595L17 20"
-                stroke="#ffff"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+            <div class="hambergerIcon">
+              <img
+                width="40"
+                class="invert hamburger"
+                src="hamberger.svg"
+                alt=""
               />
-            </svg>
 
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              color="#000000"
-              fill="none"
-            >
-              <path
-                d="M7 4L15.3306 10.0405C17.5565 11.6545 17.5565 12.3455 15.3306 13.9595L7 20"
-                stroke="#ffff"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                color="#000000"
+                fill="none"
+              >
+                <path
+                  d="M17 4L8.66943 10.0405C6.44352 11.6545 6.44353 12.3455 8.66943 13.9595L17 20"
+                  stroke="#ffff"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                color="#000000"
+                fill="none"
+              >
+                <path
+                  d="M7 4L15.3306 10.0405C17.5565 11.6545 17.5565 12.3455 15.3306 13.9595L7 20"
+                  stroke="#ffff"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
           </div>
           <div class="button">
             <button class="signupbtn">Sign up</button>
@@ -109,7 +123,34 @@
         <div class="spotifyPlaylists">
           <h1>Spotify Playlists</h1>
           <div class="cardContainer">
-            <div class="card">
+            <div data-folder="cs" class="card">
+              <div class="play">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  color="#000000"
+                  fill="#000"
+                >
+                  <path
+                    d="M18.8906 12.846C18.5371 14.189 16.8667 15.138 13.5257 17.0361C10.296 18.8709 8.6812 19.7884 7.37983 19.4196C6.8418 19.2671 6.35159 18.9776 5.95624 18.5787C5 17.6139 5 15.7426 5 12C5 8.2574 5 6.3861 5.95624 5.42132C6.35159 5.02245 6.8418 4.73288 7.37983 4.58042C8.6812 4.21165 10.296 5.12907 13.5257 6.96393C16.8667 8.86197 18.5371 9.811 18.8906 11.154C19.0365 11.7084 19.0365 12.2916 18.8906 12.846Z"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+
+              <img
+                src="https://i.scdn.co/image/ab67706f0000000249a1ed33d2ca64e6a5d0e550"
+                alt=""
+              />
+              <h2>Happy Hits!</h2>
+              <p>Hits to boost your mood and fill you with happiness!</p>
+            </div>
+
+            <div data-folder="ncs" class="card">
               <div class="play">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -144,12 +185,22 @@
 
             <div class="aboveBar">
               <div class="songInfo"></div>
+
               <div class="songButtons">
-                <img id="previous" src="prevSong.svg" alt="" />
-                <img id="play" src="play.svg" alt="" />
-                <img id="next" src="nextSong.svg" alt="" />
+                <img width="35" id="previous" src="prevSong.svg" alt="" />
+                <img width="35" id="play" src="play.svg" alt="" />
+                <img width="35" id="next" src="nextSong.svg" alt="" />
               </div>
-              <div class="songTime"></div>
+
+              <div class="timeVol">
+                <div class="songTime"></div>
+                <div class="volume">
+                  <img width="25" src="volume.svg" alt="" />
+                  <div class="range">
+                    <input type="range" name="volume" id="">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
