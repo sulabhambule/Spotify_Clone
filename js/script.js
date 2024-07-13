@@ -19,7 +19,8 @@ function secondsToMinutesSeconds(seconds) {
 
 async function getSongs(folder) {
   currFolder = folder;
-  let a = await fetch(`/${folder}/`);
+  let a = await fetch(`http://127.0.0.1:5500/${folder}/`);
+
   let response = await a.text();
   let div = document.createElement("div");
   div.innerHTML = response;
@@ -29,8 +30,7 @@ async function getSongs(folder) {
   for (let index = 0; index < as.length; index++) {
     const element = as[index];
     if (element.href.endsWith(".mp3")) {
-      songs.push(element.href.split(`/${folder}/`)[1]);
-      // it will give the arr of 2 , before /songs/ and after songs, i had accesed arr[1], which is after song name.
+      songs.push(element.href.split(`http://127.0.0.1:5500/${folder}/`)[1]);
     }
   }
 
@@ -38,6 +38,7 @@ async function getSongs(folder) {
   let songUl = document
     .querySelector(".songList")
     .getElementsByTagName("ul")[0];
+
   songUl.innerHTML = "";
 
   for (const song of songs) {
@@ -50,7 +51,7 @@ async function getSongs(folder) {
         </div>
         <div class="playNow">
           <span>Play Now</span>
-          <img class="invert" src="play.svg" alt="">
+          <img class="invert" src="images/play.svg" alt="">
         </div>
       </li>
       `;
@@ -77,7 +78,7 @@ const playMusic = (track, pause = false) => {
   currentSong.src = `/${currFolder}/` + track;
   if (!pause) {
     currentSong.play();
-    play.src = "pause.svg";
+    play.src = "images/pause.svg";
   }
   document.querySelector(".songInfo").innerHTML = decodeURI(track);
   document.querySelector(".songTime").innerHTML = "00:00 / 00:00";
@@ -86,7 +87,7 @@ const playMusic = (track, pause = false) => {
 async function displayAlbums() {
   console.log("displaying albums");
 
-  let a = await fetch(`/songs/`);
+  let a = await fetch(`http://127.0.0.1:5500/songs/`);
   let response = await a.text();
   let div = document.createElement("div");
   div.innerHTML = response;
@@ -96,11 +97,14 @@ async function displayAlbums() {
 
   for (let index = 0; index < array.length; index++) {
     const e = array[index];
-    if (e.href.includes("/songs") && !e.href.includes(".htaccess")) {
+    console.log(e.href);
+    if (e.href.includes("/songs")) {
+      // let folder = e.href.split('/').slice(-2, -1)[0];
       let folder = e.href.split("/").slice(-2)[0];
+      console.log(folder)
 
       // Get the metadata of the folder
-      let a = await fetch(`/songs/${folder}/info.json`);
+      let a = await fetch(`http://127.0.0.1:5500/songs/${folder}/info.json`);
       let response = await a.json();
       cardContainer.innerHTML += `
         <div data-folder="${folder}" class="card">
@@ -135,7 +139,7 @@ async function displayAlbums() {
   Array.from(document.getElementsByClassName("card")).forEach((e) => {
     e.addEventListener("click", async (item) => {
       console.log("Fetching Songs");
-      songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`);
+      songs = await getSongs(`http://127.0.0.1:5500/songs/${item.currentTarget.dataset.folder}`);
       playMusic(songs[0]);
     });
   });
@@ -154,10 +158,10 @@ async function main() {
   play.addEventListener("click", () => {
     if (currentSong.paused) {
       currentSong.play();
-      play.src = "images/pause.svg";
+      play.src = "img/pause.svg";
     } else {
       currentSong.pause();
-      play.src = "images/play.svg";
+      play.src = "img/play.svg";
     }
   });
 
@@ -165,9 +169,9 @@ async function main() {
 
   currentSong.addEventListener("timeupdate", () => {
     document.querySelector(".songTime").innerHTML = `
-    ${secondsToMinutesSeconds(currentSong.currentTime)}/
-    ${secondsToMinutesSeconds(currentSong.duration)}
-    `;
+    ${secondsToMinutesSeconds(
+      currentSong.currentTime
+    )} / ${secondsToMinutesSeconds(currentSong.duration)}`;
 
     document.querySelector(".circle").style.left =
       (currentSong.currentTime / currentSong.duration) * 100 + "%";
@@ -184,7 +188,7 @@ async function main() {
 
   // Add an event Listener to the Hambergur
 
-  document.querySelector(".hamburger").addEventListener("click", () => {
+  document.querySelector(".hamberger").addEventListener("click", () => {
     document.querySelector(".left").style.left = "0";
   });
 
@@ -226,13 +230,19 @@ async function main() {
   // Add event listener to mute the track
   document.querySelector(".volume>img").addEventListener("click", (e) => {
     if (e.target.src.includes("images/volume.svg")) {
-      e.target.src = e.target.src.replace("images/volume.svg", "images/mute.svg");
+      e.target.src = e.target.src.replace(
+        "images/volume.svg",
+        "images/mute.svg"
+      );
       currentSong.volume = 0;
       document
         .querySelector(".range")
         .getElementsByTagName("input")[0].value = 0;
     } else {
-      e.target.src = e.target.src.replace("images/mute.svg", "images/volume.svg");
+      e.target.src = e.target.src.replace(
+        "images/mute.svg",
+        "images/volume.svg"
+      );
       currentSong.volume = 0.1;
       document
         .querySelector(".range")
