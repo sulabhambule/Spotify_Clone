@@ -396,6 +396,11 @@ body {
   .playbar {
     right: 25px;
   }
+
+  .aboveBar {
+    align-items: center;
+    justify-content: space-around;
+  }
 }
 
 @media (max-width: 500px) {
@@ -425,5 +430,13 @@ body {
 
   .left {
     width: 100vw;
+  }
+
+  .aboveBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 13px;
   }
 }
