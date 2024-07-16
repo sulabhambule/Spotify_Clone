@@ -74,7 +74,7 @@ async function getSongs(folder) {
 
 const playMusic = (track, pause = false) => {
   // let audio = new Audio("/songs/" + track);
-  currentSong.src = `/${currFolder}/` + track;  /// check
+  currentSong.src = `/${currFolder}/` + track;
   if (!pause) {
     currentSong.play();
     play.src = "images/pause.svg";
@@ -98,7 +98,6 @@ async function displayAlbums() {
 
   for (let index = 0; index < array.length; index++) {
     const e = array[index];
-    // console.log(e.href);
     if (e.href.includes("/songs/") && !e.href.includes(".htaccess")) {
       // let folder = e.href.split('/').slice(-2, -1)[0];
       let folder = e.href.split("/").slice(-2)[1];
