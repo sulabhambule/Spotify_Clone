@@ -139,9 +139,11 @@ async function displayAlbums() {
   // Load the playlist whenever card is clicked
   Array.from(document.getElementsByClassName("card")).forEach((e) => {
     e.addEventListener("click", async (item) => {
-      console.log("Fetching Songs");
       songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`);
       playMusic(songs[0]);
+      
+      // Show the sidebar when a card is clicked (for mobile)
+      document.querySelector(".left").style.left = "0";
     });
   });
 }
